@@ -33,3 +33,42 @@ int main(){
 
     return 0;
 }
+
+//recursive solution...
+/*
+#include<bits/stdc++.h>
+using namespace std;
+
+const int M = 1e9+7;
+const int N = 1e6+5;
+
+void add(int &a , int b){
+    a = (long long)(a+b);
+    a %= M;
+}
+
+int dp[N];
+
+int fun(int x){
+    if(x<0)return 0;
+    int &res = dp[x];
+    if(res != -1)return res;
+    if(x <= 1)return res = 1;
+    int xx = 0;
+    for(int i=1;i<=6;i++) add(xx , fun(x-i));
+    return res = xx;
+}
+
+int main(){
+    cin.tie(0);ios::sync_with_stdio(false);
+    
+    int n;
+    cin>>n;
+
+    memset(dp , -1, sizeof dp);
+    fun(n);
+    cout<<dp[n]<<endl;
+
+    return 0;
+}
+*/
