@@ -1,0 +1,35 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+const int M = 1e9+7;
+const int N = 1e6+5;
+
+void add(int &a , int b){
+    a = (long long)(a+b);
+    a %= M;
+}
+
+int dp[N];
+
+int main(){
+    cin.tie(0);ios::sync_with_stdio(false);
+    
+    int n;
+    cin>>n;
+
+    dp[0] = 1;
+
+    for(int i=1;i<=n;i++){
+        int sum = 0;
+        for(int j=1;j<=6;j++){
+            if(i-j>=0){
+                add(sum , dp[i-j]);
+            }
+        }
+        dp[i] = sum;
+    }    
+
+    cout<<dp[n]<<endl;
+
+    return 0;
+}
