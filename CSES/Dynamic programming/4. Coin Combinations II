@@ -1,0 +1,38 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+const int M = 1e9+7;
+void inline add(int &a, int b){
+    a += b;
+    a %= M;
+}
+int main(){
+    cin.tie(0);ios::sync_with_stdio(false);
+    
+
+    int n,m;
+    cin>>n>>m;
+
+    vector<int>a(n);
+    for(auto &i: a){
+        cin>>i;
+    }
+        
+    vector<int>dp(m+1 , 0);
+
+    dp[0] = 1;
+
+    for(int i=0;i<n;i++){
+        for(int j=a[i];j<=m;j++){
+            add(dp[j], dp[j-a[i]]);
+        }
+    }
+
+    // for(auto &i: dp){
+    //     cout<<i<<" ";
+    // }cout<<endl;
+
+    cout<<dp[m]<<endl;
+
+    return 0;
+}
