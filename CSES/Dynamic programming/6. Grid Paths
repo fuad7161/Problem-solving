@@ -1,0 +1,52 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+const int M = 1e9+7;
+
+int inline add(int a, int b){
+    a += b;
+    a %= M;
+    return a;
+}
+
+int main(){
+    cin.tie(0);ios::sync_with_stdio(false);
+    
+    int n;
+    cin>>n;
+
+    string s[n];
+    for(int i=0;i<n;i++){
+        cin>>s[i];
+    }
+
+    vector<vector<int>>dp(n , vector<int>(n,0));
+
+    int t1 = 1,t2 = 1;
+    for(int i=0;i<n;i++){
+        if(t1)t1 = (s[0][i] == '.');
+        if(t2)t2 = (s[i][0] == '.');
+        dp[0][i] = t1;
+        dp[i][0] = t2;
+    }
+
+    for(int i=1;i<n;i++){
+        for(int j=1;j<n;j++){
+            if(s[i][j] == '.'){
+                dp[i][j] = add(dp[i][j-1] , dp[i-1][j]);
+            }
+        }
+    }
+
+
+    // for(int i=0;i<n;i++){
+    //     for(int j=0;j<n;j++){
+    //         cout<<dp[i][j]<<" ";
+    //     }cout<<endl;
+    // }
+    
+
+    cout<<dp[n-1][n-1]<<endl;
+
+    return 0;
+}
